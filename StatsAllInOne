@@ -1,0 +1,968 @@
+content = r'''
+ALL SLIPS – SHORT EASY LINUX PYTHON SOLUTIONS
+Source: TYBSc TYBCA Sem VI CS-392-MNP / CA-392-MNP Lab Course on Probability and Statistics for Data Science
+
+Run on Linux:
+    python3 filename.py
+
+Install packages if needed:
+    pip install numpy scipy matplotlib
+
+============================================================
+SLIP 1
+============================================================
+
+# slip1_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+a, b = 100, 200
+p_more_150 = (b - 150) / (b - a)
+mean = (a + b) / 2
+variance = ((b - a) ** 2) / 12
+
+print("P(X > 150) =", p_more_150)
+print("Mean =", mean)
+print("Variance =", variance)
+
+x = np.linspace(80, 220, 500)
+y = np.where((x >= a) & (x <= b), 1/(b-a), 0)
+plt.plot(x, y)
+plt.title("Uniform Distribution U(100,200)")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.grid()
+plt.show()
+
+# slip1_q2_1.py
+x = [-2, -1, 0, 1, 2, 3]
+K = (1 - (0.1 + 0.2 + 0.3)) / 4
+p = [0.1, K, 0.2, 2*K, 0.3, K]
+
+print("K =", K)
+
+cdf = []
+s = 0
+for i in p:
+    s += i
+    cdf.append(round(s, 4))
+
+print("x =", x)
+print("p(x) =", [round(i,4) for i in p])
+print("cdf =", cdf)
+
+# slip1_q2_2.py
+import math
+
+lam = 4
+p0 = math.exp(-lam)
+p3 = math.exp(-lam) * lam**3 / math.factorial(3)
+p_atleast2 = 1 - (math.exp(-lam) + math.exp(-lam)*lam)
+
+print("P(0 customers) =", round(p0, 6))
+print("P(exactly 3 customers) =", round(p3, 6))
+print("P(at least 2 customers) =", round(p_atleast2, 6))
+
+============================================================
+SLIP 2
+============================================================
+
+# slip2_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+mu, var = 50, 100
+sigma = var ** 0.5
+
+samples = np.random.normal(mu, sigma, 1000)
+print("Sample mean =", round(np.mean(samples), 4))
+print("Sample variance =", round(np.var(samples, ddof=1), 4))
+print("Theoretical mean =", mu)
+print("Theoretical variance =", var)
+
+x = np.linspace(mu - 4*sigma, mu + 4*sigma, 500)
+plt.hist(samples, bins=30, density=True, alpha=0.7)
+plt.plot(x, norm.pdf(x, mu, sigma))
+plt.title("Histogram with Normal Curve")
+plt.grid()
+plt.show()
+
+# slip2_q2_1.py
+sigma = 1.2
+k = 4 / sigma
+lower_bound = 1 - 1/(k**2)
+print("Chebyshev lower bound =", round(lower_bound, 6))
+print("So probability within 4 hours of mean is at least", round(lower_bound*100, 2), "%")
+
+# slip2_q2_2.py
+from scipy.stats import binom
+n, p = 10, 0.4
+ans = binom.cdf(3, n, p)
+print("P(X <= 3) =", round(ans, 6))
+
+============================================================
+SLIP 3
+============================================================
+
+# slip3_q1.py
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+mu, sigma, n = 45, 12, 36
+se = sigma / math.sqrt(n)
+z = (48 - mu) / se
+prob = 1 - norm.cdf(z)
+
+print("SE =", se)
+print("P(sample mean > 48) =", round(prob, 6))
+
+x = np.linspace(mu - 4*se, mu + 4*se, 500)
+y = norm.pdf(x, mu, se)
+plt.plot(x, y)
+plt.axvline(48, linestyle='--')
+plt.axvline(mu, linestyle='--')
+plt.title("Sampling Distribution")
+plt.grid()
+plt.show()
+
+# slip3_q2_1.py
+from scipy.stats import binom
+n, p = 15, 0.1
+print("P(exactly 2 defective) =", round(binom.pmf(2, n, p), 6))
+
+# slip3_q2_2.py
+from math import comb
+N, K, n = 15, 2, 5
+p1 = comb(K,1)*comb(N-K,n-1)/comb(N,n)
+p2 = comb(K,2)*comb(N-K,n-2)/comb(N,n)
+print("P(exactly 1 faulty) =", round(p1, 6))
+print("P(both faulty found) =", round(p2, 6))
+
+============================================================
+SLIP 4
+============================================================
+
+# slip4_q1.py
+import math
+from scipy.stats import chi2
+
+n = 12
+s2 = 0.0013
+df = n - 1
+alpha = 0.05
+
+var_low = (df*s2) / chi2.ppf(1-alpha/2, df)
+var_up  = (df*s2) / chi2.ppf(alpha/2, df)
+
+print("95% CI for variance =", (round(var_low, 6), round(var_up, 6)))
+print("95% CI for std dev =", (round(math.sqrt(var_low), 6), round(math.sqrt(var_up), 6)))
+
+# slip4_q2_1.py
+import math
+lam = 3
+p2 = math.exp(-lam) * lam**2 / math.factorial(2)
+p_atleast1 = 1 - math.exp(-lam)
+print("P(exactly 2 calls) =", round(p2, 6))
+print("P(at least 1 call) =", round(p_atleast1, 6))
+
+# simple binomial comparison
+n, p = 100, 3/100
+from scipy.stats import binom
+print("Approx exact binomial P(exactly 2) =", round(binom.pmf(2, n, p), 6))
+print("Approx exact binomial P(at least 1) =", round(1 - binom.pmf(0, n, p), 6))
+
+# slip4_q2_2.py
+P_D = 0.02
+P_notD = 0.98
+sens = 0.93
+spec = 0.94
+
+P_pos = sens*P_D + (1-spec)*P_notD
+P_D_pos = sens*P_D / P_pos
+
+P_neg = (1-sens)*P_D + spec*P_notD
+P_notD_neg = spec*P_notD / P_neg
+
+print("P(D|Positive) =", round(P_D_pos, 6))
+print("P(notD|Negative) =", round(P_notD_neg, 6))
+
+============================================================
+SLIP 5
+============================================================
+
+# slip5_q1.py
+import math
+
+xbar = 185
+s = 30
+n = 100
+z = 2.576   # 99% CI
+
+margin = z * s / math.sqrt(n)
+print("Why normal? n=100 is large, so by CLT sample mean is approximately normal.")
+print("99% CI =", (round(xbar - margin, 4), round(xbar + margin, 4)))
+
+# slip5_q2_1.py
+x = [0,1,2,3,4,5]
+# K+3K+5K+7K+9K+K = 26K = 1
+K = 1/26
+p = [K,3*K,5*K,7*K,9*K,K]
+print("K =", round(K, 6))
+s = 0
+cdf = []
+for i in p:
+    s += i
+    cdf.append(round(s, 6))
+print("cdf =", cdf)
+
+# slip5_q2_2.py
+from math import comb
+N, good, bad, n = 10, 7, 3, 4
+p_all_fire = comb(good,4) / comb(N,4)
+p_atmost2_not_fire = 1 - (comb(bad,3)*comb(good,1) / comb(N,4))
+print("P(all 4 fire) =", round(p_all_fire, 6))
+print("P(at most 2 not fire) =", round(p_atmost2_not_fire, 6))
+
+============================================================
+SLIP 6
+============================================================
+
+# slip6_q1.py
+import math
+from scipy.stats import norm, binom
+
+n, p = 400, 0.25
+q = 1-p
+print("Normal approximation valid?", n*p >= 5 and n*q >= 5)
+mean = n*p
+var = n*p*q
+sd = math.sqrt(var)
+print("Mean =", mean)
+print("Variance =", var)
+
+# continuity correction for at least 120
+z = (119.5 - mean) / sd
+p_norm = 1 - norm.cdf(z)
+p_exact = 1 - binom.cdf(119, n, p)
+print("Normal approximation =", round(p_norm, 6))
+print("Exact binomial =", round(p_exact, 6))
+
+# slip6_q2_1.py
+sigma = 1.2
+k = 4/sigma
+ans = 1 - 1/(k**2)
+print("Chebyshev lower bound =", round(ans, 6))
+
+# slip6_q2_2.py
+N, K, n = 52, 4, 5
+mean = n * (K/N)
+var = n*(K/N)*(1-K/N)*((N-n)/(N-1))
+print("Mean =", round(mean, 6))
+print("Variance =", round(var, 6))
+
+============================================================
+SLIP 7
+============================================================
+
+# slip7_q1.py
+import numpy as np
+from scipy.stats import chi2
+
+data = [7.72, 9.58, 12.38, 7.77, 11.27, 8.80, 11.10, 7.80, 10.17, 6.00]
+n = len(data)
+s2 = np.var(data, ddof=1)
+df = n-1
+alpha = 0.05
+
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("95% CI for variance =", (round(low,4), round(up,4)))
+
+# slip7_q2_1.py
+import math
+lam = 1.2
+p1 = math.exp(-lam)*lam
+p_atmost2 = sum(math.exp(-lam)*lam**k/math.factorial(k) for k in range(3))
+p_more3 = 1 - sum(math.exp(-lam)*lam**k/math.factorial(k) for k in range(4))
+print("P(exactly 1 error) =", round(p1, 6))
+print("P(at most 2 errors) =", round(p_atmost2, 6))
+print("P(more than 3 errors) =", round(p_more3, 6))
+
+# slip7_q2_2.py
+PA, PB = 0.70, 0.30
+PD_A, PD_B = 0.02, 0.05
+PD = PA*PD_A + PB*PD_B
+PA_D = PA*PD_A / PD
+print("P(A | defective) =", round(PA_D, 6))
+
+============================================================
+SLIP 8
+============================================================
+
+# slip8_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+a, b = 100, 200
+print("P(X > 150) =", (b-150)/(b-a))
+print("Mean =", (a+b)/2)
+print("Variance =", ((b-a)**2)/12)
+
+x = np.linspace(80, 220, 500)
+y = np.where((x >= a) & (x <= b), 1/(b-a), 0)
+plt.plot(x, y)
+plt.grid()
+plt.show()
+
+# slip8_q2_1.py
+import math
+lam = 800 * 0.001
+p0 = math.exp(-lam)
+p3 = math.exp(-lam) * lam**3 / math.factorial(3)
+print("P(no defective) =", round(p0, 6))
+print("P(exactly 3 defective) =", round(p3, 6))
+
+# slip8_q2_2.py
+mean = 151
+var = 196
+sigma = var ** 0.5
+k = (179 - mean) / sigma
+ans = 1 - 1/(k**2)
+print("At least percent within [123,179] =", round(ans*100, 2), "%")
+
+============================================================
+SLIP 9
+============================================================
+
+# slip9_q1.py
+import numpy as np
+from scipy.stats import chi2
+
+data = [12,15,14,10,13,11,16,14,13,12]
+n = len(data)
+s2 = np.var(data, ddof=1)
+df = n - 1
+alpha = 0.05
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("Sample variance =", round(s2, 6))
+print("95% CI for variance =", (round(low,6), round(up,6)))
+
+# slip9_q2_1.py
+import math
+from scipy.stats import norm, binom
+n, p = 400, 0.25
+q = 1-p
+print("Normal approximation valid?", n*p >= 5 and n*q >= 5)
+mean = n*p
+var = n*p*q
+sd = math.sqrt(var)
+z = (119.5 - mean)/sd
+p_norm = 1 - norm.cdf(z)
+p_exact = 1 - binom.cdf(119, n, p)
+print("Mean =", mean)
+print("Variance =", var)
+print("Normal approx =", round(p_norm, 6))
+print("Exact binomial =", round(p_exact, 6))
+
+# slip9_q2_2.py
+P_spam = 0.4
+P_not = 0.6
+P_free_spam = 0.7
+P_free_not = 0.05
+P_free = P_free_spam*P_spam + P_free_not*P_not
+P_spam_free = P_free_spam*P_spam / P_free
+print("P(Spam | Free) =", round(P_spam_free, 6))
+
+============================================================
+SLIP 10
+============================================================
+
+# slip10_q1.py
+import numpy as np
+from scipy.stats import chi2
+
+data = [8,10,7,9,11,6,10,9,8]
+n = len(data)
+s2 = np.var(data, ddof=1)
+df = n - 1
+alpha = 0.05
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("95% CI for variance =", (round(low,6), round(up,6)))
+
+# slip10_q2_1.py
+n, p = 600, 0.04
+mean = n*p
+var = n*p*(1-p)
+print("Mean =", mean)
+print("Variance =", var)
+
+# slip10_q2_2.py
+N, K, n = 52, 4, 5
+mean = n*(K/N)
+var = n*(K/N)*(1-K/N)*((N-n)/(N-1))
+print("Mean =", round(mean, 6))
+print("Variance =", round(var, 6))
+
+============================================================
+SLIP 11
+============================================================
+
+# slip11_q1.py
+import math
+sigma = 0.05
+n = 40
+xbar = 2.5
+z = 1.96
+margin = z * sigma / math.sqrt(n)
+print("95% CI =", (round(xbar-margin, 6), round(xbar+margin, 6)))
+
+# slip11_q2_1.py
+from math import comb
+N, K, n, x = 5000, 1000, 10, 3
+p = comb(K,x) * comb(N-K, n-x) / comb(N,n)
+print("P(exactly 3 blemished) =", round(p, 6))
+
+# slip11_q2_2.py
+import math
+n, p = 800, 0.65
+mean = n*p
+sd = math.sqrt(n*p*(1-p))
+print("Mean =", mean)
+print("SD =", round(sd, 6))
+
+============================================================
+SLIP 12
+============================================================
+
+# slip12_q1.py
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+n, p = 300, 0.5
+q = 1-p
+print("Normal approximation valid?", n*p >= 5 and n*q >= 5)
+mu = n*p
+sd = math.sqrt(n*p*q)
+
+# inclusive 140 to 170 => 139.5 to 170.5
+prob = norm.cdf((170.5-mu)/sd) - norm.cdf((139.5-mu)/sd)
+print("Probability =", round(prob, 6))
+
+x = np.linspace(mu-4*sd, mu+4*sd, 500)
+y = norm.pdf(x, mu, sd)
+plt.plot(x, y)
+xx = np.linspace(139.5, 170.5, 300)
+yy = norm.pdf(xx, mu, sd)
+plt.fill_between(xx, yy, alpha=0.5)
+plt.grid()
+plt.show()
+
+# slip12_q2_1.py
+# interpreted table exactly as given in slip
+vals = [1,3,5,7,9,3]
+# 2K + K + 0.2 + 2K + 0.3 + K = 1 => 6K = 0.5 => K=1/12
+K = 1/12
+probs = [2*K, K, 0.2, 2*K, 0.3, K]
+print("K =", round(K, 6))
+s=0
+cdf=[]
+for pr in probs:
+    s += pr
+    cdf.append(round(s,6))
+print("cdf =", cdf)
+
+# slip12_q2_2.py
+P_spam = 0.4
+P_not = 0.6
+P_free_spam = 0.7
+P_free_not = 0.05
+P_free = P_free_spam*P_spam + P_free_not*P_not
+print("P(Spam | Free) =", round(P_free_spam*P_spam/P_free, 6))
+
+============================================================
+SLIP 13
+============================================================
+
+# slip13_q1.py
+import numpy as np
+from scipy.stats import chi2
+
+data = [7.72, 9.58, 12.38, 7.77, 11.27, 8.80, 11.10, 7.80, 10.17, 6.00]
+n = len(data)
+s2 = np.var(data, ddof=1)
+df = n-1
+alpha = 0.05
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("95% CI for variance =", (round(low,4), round(up,4)))
+
+# slip13_q2_1.py
+from math import comb
+total = comb(9,5)
+fav = comb(2,2) * (comb(7,3) - comb(3,3))  # both blue and at least 1 red
+print("Probability =", round(fav/total, 6))
+
+# slip13_q2_2.py
+import math
+n, p = 600, 0.002
+q = 1-p
+p_exact2 = math.comb(n,2) * p**2 * q**(n-2)
+lam = n*p
+p_atmost1 = math.exp(-lam) * (1 + lam)
+print("P(exactly 2) =", round(p_exact2, 6))
+print("P(at most 1) =", round(p_atmost1, 6))
+
+============================================================
+SLIP 14
+============================================================
+
+# slip14_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import t
+
+data = [120,150,135,160,145,130,140,155,150,142,138,148]
+n = len(data)
+mean = np.mean(data)
+s = np.std(data, ddof=1)
+alpha = 0.05
+margin = t.ppf(1-alpha/2, n-1) * s / np.sqrt(n)
+low, up = mean-margin, mean+margin
+
+print("Point estimate =", round(mean, 6))
+print("95% CI =", (round(low, 6), round(up, 6)))
+
+plt.plot(range(1,n+1), data, marker='o')
+plt.axhline(low, linestyle='--')
+plt.axhline(mean, linestyle='--')
+plt.axhline(up, linestyle='--')
+plt.grid()
+plt.show()
+
+# slip14_q2_1.py
+n = 979
+p = 1/22
+q = 1-p
+mean = n*p
+var = n*p*q
+# at most 25 or more than 64 = outside [26,63]
+k = (64 - mean) / (var**0.5)
+lower_bound = 1 - 1/(k**2)
+outside_bound = 1 - lower_bound
+print("Chebyshev bound for outside interval <=", round(outside_bound, 6))
+
+# slip14_q2_2.py
+# winnings: 5 with prob 1/4, 2 with prob 1/2, 1 with prob 1/4
+import numpy as np
+x = np.array([5,2,1], dtype=float)
+p = np.array([1/4,1/2,1/4], dtype=float)
+EX = np.sum(x*p)
+Var = np.sum((x**2)*p) - EX**2
+print("Expected winning =", EX)
+print("Variance =", Var)
+
+============================================================
+SLIP 15
+============================================================
+
+# slip15_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+a, b = 5, 15
+mean = (a+b)/2
+var = ((b-a)**2)/12
+samples = np.random.uniform(a, b, 10000)
+print("Theoretical mean =", mean)
+print("Theoretical variance =", var)
+print("Sample mean =", round(np.mean(samples), 6))
+print("Sample variance =", round(np.var(samples, ddof=1), 6))
+
+x = np.linspace(0, 20, 500)
+y = np.where((x >= a) & (x <= b), 1/(b-a), 0)
+plt.plot(x, y)
+plt.grid()
+plt.show()
+
+# slip15_q2_1.py
+mean = 151
+var = 169
+sigma = var**0.5
+k = (179 - mean)/sigma
+ans = 1 - 1/(k**2)
+print("At least percent =", round(ans*100, 2), "%")
+
+# slip15_q2_2.py
+import math
+lam = 4
+prob = sum(math.exp(-lam)*lam**k/math.factorial(k) for k in range(2,6))
+print("P(2 to 5 customers) =", round(prob, 6))
+
+============================================================
+SLIP 16
+============================================================
+
+# slip16_q1.py
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+mu, sigma, n = 45, 12, 36
+se = sigma / math.sqrt(n)
+z = (48 - mu) / se
+prob = 1 - norm.cdf(z)
+print("SE =", se)
+print("P(sample mean > 48) =", round(prob, 6))
+
+x = np.linspace(mu-4*se, mu+4*se, 500)
+y = norm.pdf(x, mu, se)
+plt.plot(x, y)
+plt.axvline(48, linestyle='--')
+plt.axvline(mu, linestyle='--')
+plt.grid()
+plt.show()
+
+# slip16_q2_1.py
+n, p = 900, 0.06
+mean = n*p
+var = n*p*(1-p)
+print("Mean =", mean)
+print("Variance =", var)
+
+# slip16_q2_2.py
+N, K, n = 52, 4, 5
+mean = n*(K/N)
+var = n*(K/N)*(1-K/N)*((N-n)/(N-1))
+print("Mean =", round(mean, 6))
+print("Variance =", round(var, 6))
+
+============================================================
+SLIP 17
+============================================================
+
+# slip17_q1.py
+import math
+from scipy.stats import norm, binom
+
+n, p = 160, 0.3
+q = 1-p
+print("Normal approximation valid?", n*p >= 5 and n*q >= 5)
+mu = n*p
+sd = math.sqrt(n*p*q)
+
+# at most 50 => use 50.5
+p_norm = norm.cdf((50.5-mu)/sd)
+p_exact = binom.cdf(50, n, p)
+print("Normal approximation =", round(p_norm, 6))
+print("Exact binomial =", round(p_exact, 6))
+
+# slip17_q2_1.py
+n, p = 600, 0.04
+print("Mean =", n*p)
+print("Variance =", n*p*(1-p))
+
+# slip17_q2_2.py
+# P(King | Face Card) = 4 / 12
+print("P(King | Face Card) =", 4/12)
+
+============================================================
+SLIP 18
+============================================================
+
+# slip18_q1.py
+import math
+from scipy.stats import chi2
+
+n = 12
+s2 = 0.0013
+df = n - 1
+alpha = 0.05
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("95% CI variance =", (round(low,6), round(up,6)))
+print("95% CI std dev =", (round(math.sqrt(low),6), round(math.sqrt(up),6)))
+
+# slip18_q2_1.py
+p = 0.95
+n = 15
+print("P(all 15 do not spoil) =", round(p**n, 6))
+
+# slip18_q2_2.py
+sigma = 1.2
+k = 4/sigma
+ans = 1 - 1/(k**2)
+print("Chebyshev lower bound =", round(ans, 6))
+
+============================================================
+SLIP 19
+============================================================
+
+# slip19_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import t
+
+data = [120,150,135,160,145,130,140,155,150,142,138,148]
+n = len(data)
+mean = np.mean(data)
+s = np.std(data, ddof=1)
+margin = t.ppf(0.975, n-1) * s / np.sqrt(n)
+low, up = mean-margin, mean+margin
+print("Point estimate =", round(mean, 6))
+print("95% CI =", (round(low, 6), round(up, 6)))
+
+plt.plot(range(1,n+1), data, marker='o')
+plt.axhline(low, linestyle='--')
+plt.axhline(mean, linestyle='--')
+plt.axhline(up, linestyle='--')
+plt.grid()
+plt.show()
+
+# slip19_q2_1.py
+x = [-2,-1,0,1,2,3]
+K = (1 - (0.1 + 0.2 + 0.3)) / 4
+p = [0.1, K, 0.2, 2*K, 0.3, K]
+print("K =", K)
+s = 0
+cdf = []
+for i in p:
+    s += i
+    cdf.append(round(s, 4))
+print("cdf =", cdf)
+
+# slip19_q2_2.py
+import math
+lam = 3
+p2 = math.exp(-lam) * lam**2 / math.factorial(2)
+p_atleast1 = 1 - math.exp(-lam)
+print("P(exactly 2 calls) =", round(p2, 6))
+print("P(at least 1 call) =", round(p_atleast1, 6))
+
+============================================================
+SLIP 20
+============================================================
+
+# slip20_q1.py
+from scipy.stats import norm
+
+mu, sigma = 70, 8
+p_above_85 = 1 - norm.cdf(85, mu, sigma)
+p_60_75 = norm.cdf(75, mu, sigma) - norm.cdf(60, mu, sigma)
+
+print("Percentage above 85 =", round(p_above_85*100, 4), "%")
+print("P(60 < X < 75) =", round(p_60_75, 6))
+print("Z-score of 85 =", round((85-mu)/sigma, 4))
+print("Z-score of 60 =", round((60-mu)/sigma, 4))
+print("Z-score of 75 =", round((75-mu)/sigma, 4))
+
+# slip20_q2_1.py
+from math import comb
+N, K, n = 15, 2, 5
+p1 = comb(K,1)*comb(N-K,n-1)/comb(N,n)
+p2 = comb(K,2)*comb(N-K,n-2)/comb(N,n)
+print("P(exactly 1 faulty) =", round(p1, 6))
+print("P(both faulty found) =", round(p2, 6))
+
+# slip20_q2_2.py
+import math
+lam = 3
+p0 = math.exp(-lam)
+p2 = math.exp(-lam) * lam**2 / math.factorial(2)
+p_atleast1 = 1 - p0
+print("P(0 customers) =", round(p0, 6))
+print("P(exactly 2 customers) =", round(p2, 6))
+print("P(at least 1 customer) =", round(p_atleast1, 6))
+
+============================================================
+SLIP 21
+============================================================
+
+# slip21_q1.py
+import numpy as np
+from scipy.stats import chi2
+
+data = [7.72, 9.58, 12.38, 7.77, 11.27, 8.80, 11.10, 7.80, 10.17, 6.00]
+n = len(data)
+s2 = np.var(data, ddof=1)
+df = n - 1
+alpha = 0.05
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("95% CI for variance =", (round(low,4), round(up,4)))
+
+# slip21_q2_1.py
+import math
+n, p = 800, 0.65
+print("Mean =", n*p)
+print("SD =", round(math.sqrt(n*p*(1-p)), 6))
+
+# slip21_q2_2.py
+from math import comb
+N, K, n = 15, 2, 5
+p1 = comb(K,1)*comb(N-K,n-1)/comb(N,n)
+p2 = comb(K,2)*comb(N-K,n-2)/comb(N,n)
+print("P(exactly 1 faulty) =", round(p1, 6))
+print("P(both faulty found) =", round(p2, 6))
+
+============================================================
+SLIP 22
+============================================================
+
+# slip22_q1.py
+import numpy as np
+from scipy.stats import t
+
+data = [120,150,135,160,145,130,140,155,150,142,138,148]
+n = len(data)
+mean = np.mean(data)
+s = np.std(data, ddof=1)
+margin = t.ppf(0.975, n-1) * s / np.sqrt(n)
+print("Point estimate =", round(mean, 6))
+print("95% CI =", (round(mean-margin, 6), round(mean+margin, 6)))
+
+# slip22_q2_1.py
+PA, PB, PC = 0.30, 0.50, 0.20
+PD_A, PD_B, PD_C = 0.02, 0.03, 0.05
+PD = PA*PD_A + PB*PD_B + PC*PD_C
+print("P(B | defective) =", round(PB*PD_B/PD, 6))
+
+# slip22_q2_2.py
+n, p = 3, 0.5
+print("Mean =", n*p)
+print("Variance =", n*p*(1-p))
+
+============================================================
+SLIP 23
+============================================================
+
+# slip23_q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+a, b = 5, 15
+samples = np.random.uniform(a, b, 10000)
+print("Theoretical mean =", (a+b)/2)
+print("Theoretical variance =", ((b-a)**2)/12)
+print("Sample mean =", round(np.mean(samples), 6))
+print("Sample variance =", round(np.var(samples, ddof=1), 6))
+
+x = np.linspace(0, 20, 500)
+y = np.where((x >= a) & (x <= b), 1/(b-a), 0)
+plt.plot(x, y)
+plt.grid()
+plt.show()
+
+# slip23_q2_1.py
+import math
+n, p = 800, 0.65
+print("Mean =", n*p)
+print("SD =", round(math.sqrt(n*p*(1-p)), 6))
+
+# slip23_q2_2.py
+import math
+lam = 3
+p2 = math.exp(-lam) * lam**2 / math.factorial(2)
+p_atleast1 = 1 - math.exp(-lam)
+print("P(exactly 2 calls) =", round(p2, 6))
+print("P(at least 1 call) =", round(p_atleast1, 6))
+
+============================================================
+SLIP 24
+============================================================
+
+# slip24_q1.py
+import math
+from scipy.stats import chi2
+
+n = 12
+s2 = 0.0013
+df = n - 1
+alpha = 0.05
+low = (df*s2)/chi2.ppf(1-alpha/2, df)
+up = (df*s2)/chi2.ppf(alpha/2, df)
+print("95% CI variance =", (round(low,6), round(up,6)))
+print("95% CI std dev =", (round(math.sqrt(low),6), round(math.sqrt(up),6)))
+
+# slip24_q2_1.py
+x = [-2,-1,0,1,2,3]
+K = (1 - (0.1 + 0.2 + 0.3)) / 4
+p = [0.1, K, 0.2, 2*K, 0.3, K]
+print("K =", K)
+s = 0
+cdf = []
+for i in p:
+    s += i
+    cdf.append(round(s, 4))
+print("cdf =", cdf)
+
+# slip24_q2_2.py
+P_D = 0.02
+P_notD = 0.98
+sens = 0.93
+spec = 0.94
+P_pos = sens*P_D + (1-spec)*P_notD
+P_D_pos = sens*P_D / P_pos
+P_neg = (1-sens)*P_D + spec*P_notD
+P_notD_neg = spec*P_notD / P_neg
+print("P(D|Positive) =", round(P_D_pos, 6))
+print("P(notD|Negative) =", round(P_notD_neg, 6))
+
+============================================================
+SLIP 25
+============================================================
+
+# slip25_q1.py
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+mu, sigma = 60, 18
+
+n1 = 40
+se1 = sigma / math.sqrt(n1)
+print("SE for n=40 =", round(se1, 6))
+
+# question says 36 in part ii, so using 36 there
+n2 = 36
+se2 = sigma / math.sqrt(n2)
+z = (48 - mu) / se2
+prob = 1 - norm.cdf(z)
+print("P(sample mean > 48) =", round(prob, 6))
+
+x = np.linspace(mu-4*se2, mu+4*se2, 500)
+y = norm.pdf(x, mu, se2)
+plt.plot(x, y)
+plt.axvline(mu, linestyle='--')
+plt.axvline(48, linestyle='--')
+plt.grid()
+plt.show()
+
+# slip25_q2_1.py
+import math
+n, p = 600, 0.002
+q = 1-p
+p_exact2 = math.comb(n,2) * p**2 * q**(n-2)
+lam = n*p
+p_atmost1 = math.exp(-lam) * (1 + lam)
+print("P(exactly 2 accidents) =", round(p_exact2, 6))
+print("P(at most 1 accident) =", round(p_atmost1, 6))
+
+# slip25_q2_2.py
+from math import comb
+fav = comb(13,5) * comb(13,2) * comb(13,3) * comb(13,3)
+total = comb(52,13)
+print("Probability =", round(fav/total, 10))
+'''
+path = "/mnt/data/all_slips_linux_python_solutions.txt"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(content)
+print(path)
