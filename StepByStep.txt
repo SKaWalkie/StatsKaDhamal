@@ -1,0 +1,1410 @@
+Below are terminal-based Python programs for each slip.
+I’ve added step-by-step comments so you understand the logic clearly.
+________________________________________
+✅ Slip 1, Q2.1 (also same for Slip 24)
+✔ Python Code
+# Slip 1 / Slip 24
+
+# Step 1: Given probabilities
+# X = -2, -1, 0, 1, 2, 3
+# P(X) = 0.1, K, 0.2, 2K, 0.3, K
+
+# Step 2: Use condition → sum of probabilities = 1
+# 0.1 + K + 0.2 + 2K + 0.3 + K = 1
+
+# Combine constants and K terms
+# (0.1 + 0.2 + 0.3) + (K + 2K + K) = 1
+# 0.6 + 4K = 1
+
+# Step 3: Solve for K
+K = (1 - 0.6) / 4
+print("Value of K =", K)
+
+# Step 4: Construct CDF (cumulative sum)
+
+x = [-2, -1, 0, 1, 2, 3]
+p = [0.1, K, 0.2, 2*K, 0.3, K]
+
+cdf = []
+cumulative = 0
+
+for prob in p:
+    cumulative += prob   # add probability step by step
+    cdf.append(cumulative)
+
+# Step 5: Display CDF
+print("\nCDF values:")
+for i in range(len(x)):
+    print(f"F({x[i]}) = {cdf[i]}")
+________________________________________
+✅ Slip 5, Q2.1
+# Slip 5
+
+# Step 1: Given probabilities
+# X = 0,1,2,3,4,5
+# P(X) = K, 3K, 5K, 7K, 9K, K
+
+# Step 2: Sum = 1
+# K + 3K + 5K + 7K + 9K + K = 1
+# 26K = 1
+
+K = 1 / 26
+print("Value of K =", K)
+
+# Step 3: Construct CDF
+x = [0, 1, 2, 3, 4, 5]
+p = [K, 3*K, 5*K, 7*K, 9*K, K]
+
+cdf = []
+cumulative = 0
+
+for prob in p:
+    cumulative += prob
+    cdf.append(cumulative)
+
+print("\nCDF values:")
+for i in range(len(x)):
+    print(f"F({x[i]}) = {cdf[i]}")
+________________________________________
+✅ Slip 12, Q2.1
+# Slip 12
+
+# Step 1: Given
+# X = 1,3,5,7,9,3 (Note: repeated value but treated as separate probability)
+# P(X) = 2K, K, 0.2, 2K, 0.3, K
+
+# Step 2: Sum = 1
+# 2K + K + 0.2 + 2K + 0.3 + K = 1
+# 6K + 0.5 = 1
+
+K = (1 - 0.5) / 6
+print("Value of K =", K)
+
+# Step 3: CDF
+x = [1, 3, 5, 7, 9, 3]
+p = [2*K, K, 0.2, 2*K, 0.3, K]
+
+cdf = []
+cumulative = 0
+
+for prob in p:
+    cumulative += prob
+    cdf.append(cumulative)
+
+print("\nCDF values:")
+for i in range(len(x)):
+    print(f"F({x[i]}) = {cdf[i]}")
+________________________________________
+✅ Slip 22, Q2.1 (Bayes Theorem)
+# Slip 22
+
+# Step 1: Given
+P_A = 0.30
+P_B = 0.50
+P_C = 0.20
+
+P_D_given_A = 0.02
+P_D_given_B = 0.03
+P_D_given_C = 0.05
+
+# Step 2: Total probability of defective item
+P_D = (P_A * P_D_given_A) + (P_B * P_D_given_B) + (P_C * P_D_given_C)
+
+# Step 3: Apply Bayes theorem
+# P(B | D) = [P(B)*P(D|B)] / P(D)
+
+P_B_given_D = (P_B * P_D_given_B) / P_D
+
+print("Probability that defective item came from Machine B =", P_B_given_D)
+________________________________________
+✅ Slip 17, Q2.2 (Conditional Probability)
+# Slip 17
+
+# Step 1: Total face cards = 12 (J, Q, K of 4 suits)
+total_face_cards = 12
+
+# Step 2: Total Kings = 4
+total_kings = 4
+
+# Step 3: Conditional probability
+# P(King | Face Card) = Kings / Face Cards
+
+prob = total_kings / total_face_cards
+
+print("P(King | Face Card) =", prob)
+________________________________________
+✅ Slip 9 & Slip 12, Q2.2 (Bayes Theorem - Email Spam)
+# Slip 9 and Slip 12 (same question)
+
+# Step 1: Given probabilities
+P_spam = 0.40
+P_not_spam = 0.60
+
+P_free_given_spam = 0.7
+P_free_given_not_spam = 0.05
+
+# Step 2: Total probability of "Free"
+P_free = (P_spam * P_free_given_spam) + (P_not_spam * P_free_given_not_spam)
+
+# Step 3: Bayes theorem
+# P(Spam | Free)
+
+P_spam_given_free = (P_spam * P_free_given_spam) / P_free
+
+print("Probability email is spam given 'Free' =", P_spam_given_free)
+________________________________________
+🔥 Final Summary (Important for Exam)
+	Find K → Always use
+👉 Sum of probabilities = 1
+	CDF → Add probabilities step-by-step (cumulative sum)
+	Bayes Theorem →
+👉 P(A|B) = [P(A) × P(B|A)] / P(B)
+	Conditional Probability →
+👉 P(A|B) = P(A ∩ B) / P(B)
+________________________________________
+If you want, I can also:
+✅ Convert all outputs into proper exam-written answers (step-by-step theory)
+✅ OR give you short tricks to solve in 30 seconds without code
+
+
+And remaining 
+
+
+Got it — here are the remaining parts fully covered, clean terminal-style Python with step-by-step comments + a couple of important fixes where needed.
+________________________________________
+⚠️ IMPORTANT FIX (Slip 12, Q2.1)
+In your question:
+X = 1, 3, 5, 7, 9, 3
+👉 Value 3 is repeated, which is usually a mistake in exams.
+✔ Correct approach:
+	Either treat it as separate entries (as done earlier), OR
+	Combine probabilities of same value
+Below I’ll show the correct combined method (better for exams).
+________________________________________
+✅ Slip 12, Q2.1 (Corrected Version)
+# Slip 12 (Correct handling)
+
+# Step 1: Given values (combine repeated X=3)
+# X = 1, 3, 5, 7, 9
+# P(X) = 2K, (K + K), 0.2, 2K, 0.3
+# So P(3) = 2K
+
+# Step 2: Total probability = 1
+# 2K + 2K + 0.2 + 2K + 0.3 = 1
+# 6K + 0.5 = 1
+
+K = (1 - 0.5) / 6
+print("Value of K =", K)
+
+# Step 3: Define corrected distribution
+x = [1, 3, 5, 7, 9]
+p = [2*K, 2*K, 0.2, 2*K, 0.3]
+
+# Step 4: Compute CDF
+cdf = []
+cumulative = 0
+
+for prob in p:
+    cumulative += prob
+    cdf.append(cumulative)
+
+print("\nCDF values:")
+for i in range(len(x)):
+    print(f"F({x[i]}) = {cdf[i]}")
+________________________________________
+✅ Extra: Clean CDF Function (Reusable for Exam)
+You can reuse this for ANY distribution:
+# Reusable function for CDF
+
+def compute_cdf(x, p):
+    cumulative = 0
+    cdf = []
+    
+    for prob in p:
+        cumulative += prob
+        cdf.append(cumulative)
+    
+    return cdf
+
+# Example usage
+x = [-2, -1, 0, 1, 2, 3]
+p = [0.1, 0.1, 0.2, 0.2, 0.3, 0.1]
+
+cdf = compute_cdf(x, p)
+
+print("CDF:")
+for i in range(len(x)):
+    print(f"F({x[i]}) = {cdf[i]}")
+________________________________________
+✅ Extra: General Bayes Theorem Function
+# General Bayes theorem function
+
+def bayes(priors, likelihoods, target_index):
+    # Step 1: Compute total probability
+    total = 0
+    for i in range(len(priors)):
+        total += priors[i] * likelihoods[i]
+    
+    # Step 2: Apply Bayes formula
+    result = (priors[target_index] * likelihoods[target_index]) / total
+    return result
+
+# Example (Machine problem)
+priors = [0.30, 0.50, 0.20]
+likelihoods = [0.02, 0.03, 0.05]
+
+# Probability it came from Machine B (index 1)
+print("P(B | Defective) =", bayes(priors, likelihoods, 1))
+________________________________________
+✅ Final Quick Answers (for revision)
+✔ K values
+	Slip 1 / 24 → K = 0.1
+	Slip 5 → K = 1/26
+	Slip 12 → K = 1/12
+________________________________________
+✔ Bayes Results
+	Machine B → ≈ 0.4839
+	Spam given "Free" → ≈ 0.9032
+________________________________________
+✔ Conditional Probability
+	P(King | Face Card) → 1/3
+________________________________________
+🔥 If you want next:
+I can give you:
+✅ All answers in perfect handwritten exam format (stepwise)
+✅ OR MCQ shortcuts + tricks
+✅ OR convert all into single Python menu-driven program (very useful for viva)
+
+
+
+
+Alright, here are all questions solved in terminal-style Python, with clear step-by-step comments so you can both understand and write in exams.
+________________________________________
+✅ Slip 3, Q2.1 (Binomial Distribution)
+# Slip 3, Q2.1
+
+import math
+
+# Step 1: Given values
+n = 15          # total bulbs
+p = 0.1         # probability of defective
+x = 2           # exactly 2 defective
+
+# Step 2: Binomial formula
+# P(X = x) = nCx * (p^x) * (1-p)^(n-x)
+
+comb = math.comb(n, x)   # nCx
+prob = comb * (p**x) * ((1-p)**(n-x))
+
+# Step 3: Output
+print("Probability of exactly 2 defective bulbs =", prob)
+________________________________________
+✅ Slip 3, Q2.2 (Hypergeometric Distribution)
+# Slip 3, Q2.2
+
+import math
+
+# Step 1: Given
+N = 15   # total compressors
+K = 2    # faulty compressors
+n = 5    # sample size
+
+# (i) Probability of exactly 1 faulty
+x = 1
+
+# Hypergeometric formula:
+# P(X=x) = [C(K,x) * C(N-K, n-x)] / C(N,n)
+
+num = math.comb(K, x) * math.comb(N-K, n-x)
+den = math.comb(N, n)
+
+prob_1_faulty = num / den
+print("(i) Probability of 1 faulty =", prob_1_faulty)
+
+# (ii) Probability of finding both faulty (x = 2)
+x = 2
+
+num = math.comb(K, x) * math.comb(N-K, n-x)
+prob_2_faulty = num / den
+
+print("(ii) Probability of both faulty =", prob_2_faulty)
+________________________________________
+✅ Slip 5, Q2.2 (Hypergeometric)
+# Slip 5, Q2.2
+
+import math
+
+# Step 1: Given
+N = 10   # total missiles
+K = 3    # defective (won't fire)
+n = 4    # selected
+
+# (i) All 4 fire → no defective selected (x = 0)
+x = 0
+
+num = math.comb(K, x) * math.comb(N-K, n-x)
+den = math.comb(N, n)
+
+prob_all_fire = num / den
+print("(i) Probability all 4 fire =", prob_all_fire)
+
+# (ii) At most 2 will not fire → x = 0,1,2
+prob_at_most_2 = 0
+
+for x in range(0, 3):   # 0,1,2
+    num = math.comb(K, x) * math.comb(N-K, n-x)
+    prob_at_most_2 += num / den
+
+print("(ii) Probability at most 2 not fire =", prob_at_most_2)
+________________________________________
+✅ Slip 7, Q2.2 (Bayes Theorem)
+# Slip 7, Q2.2
+
+# Step 1: Given
+P_A = 0.7
+P_B = 0.3
+
+P_D_given_A = 0.02
+P_D_given_B = 0.05
+
+# Step 2: Total defective probability
+P_D = (P_A * P_D_given_A) + (P_B * P_D_given_B)
+
+# Step 3: Bayes formula
+P_A_given_D = (P_A * P_D_given_A) / P_D
+
+print("Probability defective bulb came from A =", P_A_given_D)
+________________________________________
+✅ Slip 10 & 16, Q2.2 (Hypergeometric Mean & Variance)
+# Slip 10 & Slip 16 (same)
+
+# Step 1: Given
+N = 52   # total cards
+K = 4    # aces
+n = 5    # cards drawn
+
+# Step 2: Mean formula
+# Mean = n * (K/N)
+mean = n * (K / N)
+
+# Step 3: Variance formula
+# Var = n*(K/N)*(1 - K/N)*((N-n)/(N-1))
+
+variance = n * (K/N) * (1 - K/N) * ((N - n) / (N - 1))
+
+print("Mean =", mean)
+print("Variance =", variance)
+________________________________________
+✅ Slip 23, Q2.1 (Binomial Mean & SD)
+# Slip 23, Q2.1
+
+import math
+
+# Step 1: Given
+n = 800
+p = 0.65
+
+# Step 2: Mean = n*p
+mean = n * p
+
+# Step 3: Standard deviation = sqrt(n*p*(1-p))
+sd = math.sqrt(n * p * (1 - p))
+
+print("Mean =", mean)
+print("Standard Deviation =", sd)
+________________________________________
+✅ Slip 23, Q2.2 (Poisson Distribution)
+# Slip 23, Q2.2
+
+import math
+
+# Step 1: Given
+lam = 3   # average calls per minute
+
+# (i) Exactly 2 calls
+x = 2
+
+# Poisson formula:
+# P(X=x) = (e^-λ * λ^x) / x!
+
+prob_2 = (math.exp(-lam) * (lam**x)) / math.factorial(x)
+
+print("(i) Probability of exactly 2 calls =", prob_2)
+
+# (ii) At least one call
+# P(at least 1) = 1 - P(0)
+
+prob_0 = (math.exp(-lam) * (lam**0)) / math.factorial(0)
+prob_at_least_1 = 1 - prob_0
+
+print("(ii) Probability of at least one call =", prob_at_least_1)
+________________________________________
+🔥 Final Quick Revision
+✔ Binomial
+	Use when: independent trials
+	Formula:
+P(X=x) = nCx * p^x * (1-p)^(n-x)
+________________________________________
+✔ Hypergeometric
+	Use when: without replacement
+	Formula:
+P(X=x) = [C(K,x) * C(N-K, n-x)] / C(N,n)
+________________________________________
+✔ Poisson
+	Use when: rate/average given
+	Formula:
+P(X=x) = (e^-λ * λ^x) / x!
+________________________________________
+✔ Mean & Variance
+	Binomial:
+Mean = np, Variance = np(1-p)
+	Hypergeometric:
+Mean = n(K/N)
+________________________________________
+If you want next:
+✅ I can convert all these into one single Python menu-driven program (very important for viva)
+✅ Or give exam-written theory answers step-by-step (full marks format)
+
+
+3. Chebyshev’s Theorem, Poisson Distribution, Approximation of Poisson to Binomial Slip 1, Q2.2 The average number of customers arriving at a counter is 4 per hour. Assuming arrivals follow a Poisson distribution, find the probability that in a given hour: (i) No customer arrives (ii) Exactly 3 customers arrive (iii) At least 2 customers arrive Slip 4, Q2.1 At a telephone exchange, the average number of calls received per minute is 3. Assuming that the number of calls follows a Poisson distribution, find the probability that in a given minute: (i) Exactly 2 calls are received (ii) At least one call is received. (iii) Compare above probability with exact binomial probability Slip 6, Q1 & Q2.1 The probability that a customer makes an online purchase after visiting a website is 0.25, out of 400 visitors: (i) Find theoretical mean and variance. (ii) Find the probability that at least 120 customers make a purchase using normal approximation. Slip 6, Q2.1 The time taken by students to fill out a loan request form has standard deviation 1.2 hours. What does Chebyshev’s theorem tell us about the probability that a student’s time will be within 4 hours of the mean μ for all potential loan applicants? Slip 8, Q2.1 & Q2.2 The probability that a manufactured item is defective is 0.001. If 800 items are inspected, find the probability that: (i) No item is defective (ii) Exactly 3 are defective (Use Poisson approximation) Chebyshev's theorem: Find what percent of the values will fall between 123 and 179 for a data set with mean of 151 and variance of 196. Slip 13, Q2.2 In a large city, the probability that a person meets with an accident in a year is 0.002. If 600 people are considered, find the probability that: (i) Exactly 2 people meet with an accident (ii) At most one person meets with an accident (Use Poisson approximation) Slip 14, Q2.1 In 1 out of 22 cases, the plastic used in microwave-friendly containers fails to meet heat standards. If 979 specimens are tested, what does Chebyshev’s theorem tell us about the probability of getting at most 25 or more than 64 containers that do not meet the heat standards? Slip 15, Q2.1 & Q2.2 Chebyshev's theorem: Find percent of values between 123 and 179. Poisson: The number of customers entering a shop follows Poisson distribution with rate 4 per hour. Find the probability that between 2 and 5 customers (inclusive) enter the shop. Slip 17, Q1 In a large housing society, the probability that a house has 4 motorcycles is 0.3. In a random survey of 160 houses: (i) Verify normal approximation condition. (ii) Find the probability that at most 50 houses have 4 motorcycles. (iii) Compare with exact binomial probability. Slip 25, Q2.1 In a large city, the probability that a person meets with an accident in a year is 0.002. If 600 people are considered, find the probability that: (i) Exactly 2 people meet with an accident (ii) At most one person meets with an accident (Use Poisson approximation) Solve every questions in python code in terminal version and explain me every steps through comments (step by step).
+
+
+Alright, this is a big set, so I’ll keep everything clean, terminal-style Python, with step-by-step comments for each question.
+________________________________________
+✅ Slip 1, Q2.2 (Poisson Distribution)
+# Slip 1, Q2.2
+
+import math
+
+# Step 1: Given average (λ)
+lam = 4   # customers per hour
+
+# (i) No customer arrives → X = 0
+# Formula: P(X=x) = e^-λ * λ^x / x!
+p0 = (math.exp(-lam) * lam**0) / math.factorial(0)
+print("(i) P(0 customers) =", p0)
+
+# (ii) Exactly 3 customers → X = 3
+p3 = (math.exp(-lam) * lam**3) / math.factorial(3)
+print("(ii) P(3 customers) =", p3)
+
+# (iii) At least 2 customers → P(X ≥ 2)
+# = 1 - [P(0) + P(1)]
+p1 = (math.exp(-lam) * lam**1) / math.factorial(1)
+p_atleast2 = 1 - (p0 + p1)
+
+print("(iii) P(at least 2) =", p_atleast2)
+________________________________________
+✅ Slip 4, Q2.1 (Poisson + Binomial Comparison)
+# Slip 4, Q2.1
+
+import math
+
+lam = 3   # average calls
+
+# (i) Exactly 2 calls
+p2 = (math.exp(-lam) * lam**2) / math.factorial(2)
+print("(i) Poisson P(2 calls) =", p2)
+
+# (ii) At least one call
+p0 = (math.exp(-lam) * lam**0) / math.factorial(0)
+p_atleast1 = 1 - p0
+print("(ii) Poisson P(at least 1) =", p_atleast1)
+
+# (iii) Compare with Binomial
+# Assume n large, p small → take n=100, p=λ/n = 3/100
+
+n = 100
+p = lam / n
+
+# Binomial probability for X=2
+binomial = math.comb(n, 2) * (p**2) * ((1-p)**(n-2))
+print("(iii) Binomial approx P(2 calls) =", binomial)
+________________________________________
+✅ Slip 6, Q1 & Q2.1 (Normal Approximation)
+# Slip 6
+
+import math
+
+# Step 1: Given
+n = 400
+p = 0.25
+
+# (i) Mean and Variance
+mean = n * p
+variance = n * p * (1 - p)
+
+print("Mean =", mean)
+print("Variance =", variance)
+
+# (ii) Normal Approximation for X ≥ 120
+
+# Step 2: Standard deviation
+sd = math.sqrt(variance)
+
+# Step 3: Continuity correction → X ≥ 120 → 119.5
+z = (119.5 - mean) / sd
+
+# Step 4: Use approximate Z-table value
+# For simplicity, using erf for normal CDF
+def normal_cdf(z):
+    return (1 + math.erf(z / math.sqrt(2))) / 2
+
+prob = 1 - normal_cdf(z)
+
+print("P(at least 120 customers) =", prob)
+________________________________________
+✅ Slip 6, Chebyshev
+# Chebyshev Theorem
+
+# Step 1: Given
+sd = 1.2
+k = 4 / sd   # number of standard deviations
+
+# Step 2: Chebyshev formula
+# P(|X - μ| < kσ) ≥ 1 - 1/k^2
+
+prob = 1 - (1 / (k**2))
+
+print("Minimum probability within 4 hours =", prob)
+________________________________________
+✅ Slip 8 (Poisson Approximation + Chebyshev)
+# Slip 8
+
+import math
+
+# Poisson approximation
+n = 800
+p = 0.001
+lam = n * p   # λ = np
+
+# (i) No defective → X=0
+p0 = (math.exp(-lam) * lam**0) / math.factorial(0)
+print("(i) P(0 defective) =", p0)
+
+# (ii) Exactly 3 defective
+p3 = (math.exp(-lam) * lam**3) / math.factorial(3)
+print("(ii) P(3 defective) =", p3)
+
+# Chebyshev part
+mean = 151
+variance = 196
+sd = math.sqrt(variance)
+
+# Range: 123 to 179 → distance = 28
+k = 28 / sd
+
+prob = 1 - (1 / (k**2))
+print("Chebyshev minimum probability =", prob)
+________________________________________
+✅ Slip 13 / 25 (Poisson Approximation)
+# Slip 13 & 25
+
+import math
+
+n = 600
+p = 0.002
+lam = n * p
+
+# (i) Exactly 2 accidents
+p2 = (math.exp(-lam) * lam**2) / math.factorial(2)
+print("(i) P(2 accidents) =", p2)
+
+# (ii) At most 1 → P(0) + P(1)
+p0 = (math.exp(-lam) * lam**0) / math.factorial(0)
+p1 = (math.exp(-lam) * lam**1) / math.factorial(1)
+
+p_atmost1 = p0 + p1
+print("(ii) P(at most 1) =", p_atmost1)
+________________________________________
+✅ Slip 14 (Chebyshev)
+# Slip 14
+
+import math
+
+# Step 1: Given
+p = 1/22
+n = 979
+
+mean = n * p
+variance = n * p * (1 - p)
+sd = math.sqrt(variance)
+
+# Range: 25 to 64
+# Distance from mean (approx)
+k = min((mean - 25)/sd, (64 - mean)/sd)
+
+# Chebyshev inequality
+prob = 1 - (1 / (k**2))
+
+print("Minimum probability within range =", prob)
+________________________________________
+✅ Slip 15 (Poisson + Chebyshev)
+# Slip 15
+
+import math
+
+# Chebyshev
+mean = 151
+variance = 196
+sd = math.sqrt(variance)
+
+k = 28 / sd
+prob = 1 - (1 / (k**2))
+print("Chebyshev probability =", prob)
+
+# Poisson part
+lam = 4
+
+# P(2 ≤ X ≤ 5)
+total = 0
+for x in range(2, 6):
+    total += (math.exp(-lam) * lam**x) / math.factorial(x)
+
+print("P(2 to 5 customers) =", total)
+________________________________________
+✅ Slip 17 (Normal Approximation + Binomial)
+# Slip 17
+
+import math
+
+n = 160
+p = 0.3
+
+# (i) Check condition
+print("np =", n*p)
+print("n(1-p) =", n*(1-p))
+
+# (ii) Normal approximation
+mean = n * p
+sd = math.sqrt(n * p * (1 - p))
+
+# At most 50 → 50.5 (continuity correction)
+z = (50.5 - mean) / sd
+
+def normal_cdf(z):
+    return (1 + math.erf(z / math.sqrt(2))) / 2
+
+prob_normal = normal_cdf(z)
+print("(ii) Normal approx =", prob_normal)
+
+# (iii) Exact binomial
+prob_binomial = 0
+for x in range(0, 51):
+    prob_binomial += math.comb(n, x) * (p**x) * ((1-p)**(n-x))
+
+print("(iii) Exact binomial =", prob_binomial)
+________________________________________
+🔥 Final Quick Concepts (Very Important)
+✔ Poisson Shortcut
+	λ = np
+	Use when n large, p small
+________________________________________
+✔ Chebyshev
+	Formula:
+P(|X-μ| < kσ) ≥ 1 - 1/k²
+________________________________________
+✔ Normal Approximation
+	Use when:
+np ≥ 5 and n(1-p) ≥ 5
+	Always use continuity correction
+________________________________________
+If you want next:
+✅ I can convert all 3 units into one single Python project (menu-driven)
+✅ Or give perfect theory answers (for writing in exam)
+✅ Or give short tricks to solve without calculator
+
+
+
+Great, this unit is very practical. I’ll give you terminal-style Python code for each slip, with clear step-by-step comments, so you can run and understand everything.
+________________________________________
+✅ Slip 1, Q1 (Uniform Distribution)
+# Slip 1, Q1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Given range
+a = 100
+b = 200
+
+# (i) Probability that X > 150
+# For uniform: P(X > c) = (b - c) / (b - a)
+
+prob = (b - 150) / (b - a)
+print("(i) P(X > 150) =", prob)
+
+# (ii) Mean and Variance
+# Mean = (a + b) / 2
+# Variance = (b - a)^2 / 12
+
+mean = (a + b) / 2
+variance = ((b - a)**2) / 12
+
+print("(ii) Mean =", mean)
+print("Variance =", variance)
+
+# (iii) Plot uniform distribution curve
+x = np.linspace(a, b, 1000)
+y = [1/(b-a)] * len(x)
+
+plt.plot(x, y)
+plt.title("Uniform Distribution U(100,200)")
+plt.xlabel("X")
+plt.ylabel("f(x)")
+plt.show()
+________________________________________
+✅ Slip 2, Q1 (Normal Distribution Simulation)
+# Slip 2, Q1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Given parameters
+mean = 50
+variance = 100
+sd = np.sqrt(variance)
+
+# Step 2: Generate 1000 samples
+data = np.random.normal(mean, sd, 1000)
+
+# (i) Sample mean and variance
+sample_mean = np.mean(data)
+sample_variance = np.var(data)
+
+print("(i) Sample Mean =", sample_mean)
+print("Sample Variance =", sample_variance)
+
+# (ii) Compare with theoretical
+print("(ii) Theoretical Mean =", mean)
+print("Theoretical Variance =", variance)
+
+# (iii) Plot histogram + normal curve
+plt.hist(data, bins=30, density=True)
+
+# normal curve
+x = np.linspace(min(data), max(data), 1000)
+y = (1/(sd*np.sqrt(2*np.pi))) * np.exp(-(x-mean)**2/(2*variance))
+
+plt.plot(x, y)
+plt.title("Normal Distribution Histogram")
+plt.show()
+________________________________________
+✅ Slip 3, Q1 (Sampling Distribution)
+# Slip 3, Q1
+
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Given
+mu = 45
+sigma = 12
+n = 36
+
+# (i) Standard Error
+# SE = sigma / sqrt(n)
+SE = sigma / math.sqrt(n)
+print("(i) Standard Error =", SE)
+
+# (ii) Probability sample mean > 48
+
+z = (48 - mu) / SE
+
+# Normal CDF
+def normal_cdf(z):
+    return (1 + math.erf(z / math.sqrt(2))) / 2
+
+prob = 1 - normal_cdf(z)
+print("(ii) P(sample mean > 48) =", prob)
+
+# (iii) Visualization
+data = np.random.normal(mu, SE, 1000)
+
+plt.hist(data, bins=30, density=True)
+plt.axvline(48)  # mark value
+plt.title("Sampling Distribution")
+plt.show()
+________________________________________
+✅ Slip 15, Q1 (Uniform U(5,15))
+# Slip 15, Q1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Given
+a = 5
+b = 15
+
+# (i) Theoretical mean & variance
+mean = (a + b) / 2
+variance = ((b - a)**2) / 12
+
+print("(i) Mean =", mean)
+print("Variance =", variance)
+
+# (ii) Verify using Python (formula already used)
+
+# (iii) Generate 10000 samples
+data = np.random.uniform(a, b, 10000)
+
+sample_mean = np.mean(data)
+sample_variance = np.var(data)
+
+print("(iii) Sample Mean =", sample_mean)
+print("Sample Variance =", sample_variance)
+
+# (iv) Plot curve
+plt.hist(data, bins=30, density=True)
+plt.title("Uniform Distribution U(5,15)")
+plt.show()
+________________________________________
+✅ Slip 23, Q1 (Same as Slip 15, reordered)
+# Slip 23, Q1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+a = 5
+b = 15
+
+# (i) Theoretical
+mean = (a + b) / 2
+variance = ((b - a)**2) / 12
+
+print("(i) Mean =", mean)
+print("Variance =", variance)
+
+# (ii) Generate samples
+data = np.random.uniform(a, b, 10000)
+
+sample_mean = np.mean(data)
+sample_variance = np.var(data)
+
+print("(ii) Sample Mean =", sample_mean)
+print("Sample Variance =", sample_variance)
+
+# (iii) Verified above
+
+# (iv) Plot
+plt.hist(data, bins=30, density=True)
+plt.title("Uniform Distribution")
+plt.show()
+________________________________________
+✅ Slip 20, Q1 (Normal Distribution)
+# Slip 20, Q1
+
+import math
+
+# Step 1: Given
+mean = 70
+sd = 8
+
+# Normal CDF
+def normal_cdf(z):
+    return (1 + math.erf(z / math.sqrt(2))) / 2
+
+# (i) P(X > 85)
+z1 = (85 - mean) / sd
+prob_above_85 = 1 - normal_cdf(z1)
+
+print("(i) Percentage above 85 =", prob_above_85 * 100)
+
+# (ii) P(60 < X < 75)
+z2 = (60 - mean) / sd
+z3 = (75 - mean) / sd
+
+prob_between = normal_cdf(z3) - normal_cdf(z2)
+
+print("(ii) Probability between 60 and 75 =", prob_between)
+
+# (iii) Z-scores
+print("(iii) Z-score for 85 =", z1)
+print("Z-score for 60 =", z2)
+print("Z-score for 75 =", z3)
+________________________________________
+🔥 Final Concepts (Must Remember)
+✔ Uniform Distribution
+	Mean = (a+b)/2
+	Variance = (b-a)^2 / 12
+________________________________________
+✔ Normal Distribution
+	Z = (X - μ) / σ
+	Use CDF for probabilities
+________________________________________
+✔ Sampling Distribution
+	Standard Error = σ / √n
+________________________________________
+✔ Graphs
+	Uniform → straight line
+	Normal → bell-shaped curve
+________________________________________
+If you want next:
+✅ I can combine all 4 units into one single Python project (menu-driven)
+✅ Or give step-by-step handwritten answers (for exams)
+✅ Or give short tricks (no calculator solving)
+Perfect, this unit is very scoring. I’ll give you terminal-style Python code with step-by-step comments for every slip.
+________________________________________
+✅ Slip 11, Q1 (Confidence Interval, σ known → Z)
+# Slip 11, Q1
+
+import math
+
+# Step 1: Given
+sigma = 0.05     # population standard deviation
+n = 40           # sample size
+x_bar = 2.5      # sample mean
+
+# Step 2: Z value for 95% confidence
+z = 1.96
+
+# Step 3: Standard Error (SE = σ / √n)
+SE = sigma / math.sqrt(n)
+
+# Step 4: Margin of Error
+ME = z * SE
+
+# Step 5: Confidence Interval
+lower = x_bar - ME
+upper = x_bar + ME
+
+print("95% Confidence Interval = (", lower, ",", upper, ")")
+________________________________________
+✅ Slip 14, Q1 (Small Sample → t-distribution)
+# Slip 14, Q1
+
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+# Step 1: Given data
+data = [120,150,135,160,145,130,140,155,150,142,138,148]
+
+# (i) Point estimate → sample mean
+mean = np.mean(data)
+print("(i) Sample Mean =", mean)
+
+# Step 2: Sample standard deviation
+s = np.std(data, ddof=1)
+n = len(data)
+
+# Step 3: t-value for 95% CI and df = n-1 = 11
+t = 2.201   # from t-table
+
+# Step 4: Standard Error
+SE = s / math.sqrt(n)
+
+# Step 5: Margin of Error
+ME = t * SE
+
+# Step 6: Confidence Interval
+lower = mean - ME
+upper = mean + ME
+
+print("(ii) 95% CI = (", lower, ",", upper, ")")
+
+# (iii) Plot
+plt.scatter(range(n), data)
+plt.axhline(mean)
+plt.axhline(lower)
+plt.axhline(upper)
+plt.title("Confidence Interval Plot")
+plt.show()
+________________________________________
+✅ Slip 5, Q1
+# Slip 5, Q1
+
+import math
+
+# (i) Explanation:
+# Because n = 100 (large sample), Central Limit Theorem applies
+print("(i) Large sample → use Normal Distribution (CLT)")
+
+# Step 2: Given
+x_bar = 185
+s = 30
+n = 100
+
+# Step 3: Z value for 99% CI
+z = 2.576
+
+# Step 4: Standard Error
+SE = s / math.sqrt(n)
+
+# Step 5: Margin of Error
+ME = z * SE
+
+# Step 6: CI
+lower = x_bar - ME
+upper = x_bar + ME
+
+print("(ii) 99% CI = (", lower, ",", upper, ")")
+________________________________________
+✅ Slip 25, Q1 (Sampling Distribution)
+# Slip 25, Q1
+
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Given
+mu = 60
+sigma = 18
+n = 40
+
+# (i) Standard Error
+SE = sigma / math.sqrt(n)
+print("(i) Standard Error =", SE)
+
+# (ii) Probability sample mean > 48
+
+z = (48 - mu) / SE
+
+def normal_cdf(z):
+    return (1 + math.erf(z / math.sqrt(2))) / 2
+
+prob = 1 - normal_cdf(z)
+print("(ii) P(mean > 48) =", prob)
+
+# (iii) Visualization
+data = np.random.normal(mu, SE, 1000)
+
+plt.hist(data, bins=30, density=True)
+plt.axvline(48)
+plt.title("Sampling Distribution")
+plt.show()
+________________________________________
+✅ Slip 16, Q1 (Same type)
+# Slip 16, Q1
+
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Given
+mu = 45
+sigma = 12
+n = 36
+
+# (i) Standard Error
+SE = sigma / math.sqrt(n)
+print("(i) Standard Error =", SE)
+
+# (ii) Probability sample mean > 48
+z = (48 - mu) / SE
+
+def normal_cdf(z):
+    return (1 + math.erf(z / math.sqrt(2))) / 2
+
+prob = 1 - normal_cdf(z)
+print("(ii) P(mean > 48) =", prob)
+
+# (iii) Visualization
+data = np.random.normal(mu, SE, 1000)
+
+plt.hist(data, bins=30, density=True)
+plt.axvline(48)
+plt.title("Sampling Distribution")
+plt.show()
+________________________________________
+🔥 Final Exam Concepts (Very Important)
+✔ Confidence Interval (σ known)
+	Use Z-distribution
+	Formula:
+x̄ ± Z(σ/√n)
+________________________________________
+✔ Confidence Interval (σ unknown, small sample)
+	Use t-distribution
+	Formula:
+x̄ ± t(s/√n)
+________________________________________
+✔ Standard Error
+	SE = σ / √n
+________________________________________
+✔ When to use Normal (CLT)
+	If n ≥ 30, use Normal even if population unknown
+________________________________________
+✔ Z values
+	95% → 1.96
+	99% → 2.576
+________________________________________
+If you want next:
+✅ I can combine all 5 units into one single Python program (menu-driven)
+✅ Or give perfect exam-writing answers (step-by-step theory)
+✅ Or give short tricks to solve in 20 seconds
+
+
+This unit is all about Chi-Square (χ²) distribution. I’ll solve every slip using terminal-style Python, with step-by-step comments so you can both run and write in exam.
+________________________________________
+🔥 Formula (VERY IMPORTANT)
+For variance:
+"CI for " σ^2=(((n-1)s^2)/(χ_upper^2 )ⓜ,((n-1)s^2)/(χ_lower^2 ))
+
+For standard deviation:
+"CI for " σ=√("CI for " σ^2 )
+
+________________________________________
+✅ Slip 4, Q1 (also same as Slip 18)
+# Slip 4 / Slip 18
+
+import math
+from scipy.stats import chi2
+
+# Step 1: Given
+n = 12
+s2 = 0.0013   # sample variance
+df = n - 1
+
+# Step 2: Chi-square values for 95% CI
+# alpha = 0.05 → split into 0.025 each side
+
+chi2_lower = chi2.ppf(0.025, df)
+chi2_upper = chi2.ppf(0.975, df)
+
+# Step 3: Confidence Interval for variance
+lower_var = (df * s2) / chi2_upper
+upper_var = (df * s2) / chi2_lower
+
+print("(i) CI for variance =", (lower_var, upper_var))
+
+# Step 4: CI for standard deviation
+lower_sd = math.sqrt(lower_var)
+upper_sd = math.sqrt(upper_var)
+
+print("(ii) CI for standard deviation =", (lower_sd, upper_sd))
+________________________________________
+✅ Slip 7, Q1 (also same as Slip 21)
+# Slip 7 / Slip 21
+
+import numpy as np
+from scipy.stats import chi2
+
+# Step 1: Data
+data = [7.72, 9.58, 12.38, 7.77, 11.27, 8.80, 11.10, 7.80, 10.17, 6.00]
+
+# Step 2: Sample size and variance
+n = len(data)
+df = n - 1
+s2 = np.var(data, ddof=1)
+
+print("Sample variance =", s2)
+
+# Step 3: Chi-square values
+chi2_lower = chi2.ppf(0.025, df)
+chi2_upper = chi2.ppf(0.975, df)
+
+# Step 4: CI for variance
+lower_var = (df * s2) / chi2_upper
+upper_var = (df * s2) / chi2_lower
+
+print("(i) CI for variance =", (lower_var, upper_var))
+
+# (ii) Already assumed normal distribution → valid
+________________________________________
+✅ Slip 9, Q1
+# Slip 9
+
+import numpy as np
+from scipy.stats import chi2
+
+# Step 1: Data
+data = [12, 15, 14, 10, 13, 11, 16, 14, 13, 12]
+
+# Step 2: Compute variance
+n = len(data)
+df = n - 1
+s2 = np.var(data, ddof=1)
+
+print("Sample variance =", s2)
+
+# Step 3: Chi-square values
+chi2_lower = chi2.ppf(0.025, df)
+chi2_upper = chi2.ppf(0.975, df)
+
+# Step 4: CI
+lower = (df * s2) / chi2_upper
+upper = (df * s2) / chi2_lower
+
+print("95% CI for variance =", (lower, upper))
+________________________________________
+✅ Slip 10, Q1
+# Slip 10
+
+import numpy as np
+from scipy.stats import chi2
+
+# Step 1: Data
+data = [8, 10, 7, 9, 11, 6, 10, 9, 8]
+
+# Step 2: Sample variance
+n = len(data)
+df = n - 1
+s2 = np.var(data, ddof=1)
+
+print("Sample variance =", s2)
+
+# Step 3: Chi-square values
+chi2_lower = chi2.ppf(0.025, df)
+chi2_upper = chi2.ppf(0.975, df)
+
+# Step 4: CI
+lower = (df * s2) / chi2_upper
+upper = (df * s2) / chi2_lower
+
+print("95% CI for variance =", (lower, upper))
+________________________________________
+🔥 Final Concepts (Must Remember for Exam)
+✔ When to use Chi-Square
+	Population is normal
+	Finding variance or standard deviation
+________________________________________
+✔ Steps
+	Find sample variance (s²)
+	Find degrees of freedom (df = n-1)
+	Get χ² values from table
+	Apply formula
+________________________________________
+✔ Important
+	Lower limit uses χ² upper
+	Upper limit uses χ² lower
+👉 Students often make mistake here
+________________________________________
+✔ For Standard Deviation
+Just take square root of variance limits
+________________________________________
+🚀 If you want next:
+I can:
+✅ Combine all 6 units into ONE menu-driven Python project (very important for viva)
+✅ OR give perfect theory answers (step-by-step writing for exam)
+✅ OR give chi-square table shortcuts (no calculator tricks)
+
+
+And remaining 
+
+
+Good catch — you’ve already covered most, but I’ll complete the remaining parts cleanly, plus make everything exam-perfect and reusable.
+I’ll add:
+	✅ Standard deviation CI where missing
+	✅ Reusable generic program (very useful for viva)
+	✅ Cleaner structured versions
+________________________________________
+✅ Slip 7 & Slip 21 (Add missing SD part)
+# Slip 7 / 21 (Complete version)
+
+import numpy as np
+import math
+from scipy.stats import chi2
+
+# Step 1: Data
+data = [7.72, 9.58, 12.38, 7.77, 11.27, 8.80, 11.10, 7.80, 10.17, 6.00]
+
+# Step 2: Sample size & variance
+n = len(data)
+df = n - 1
+s2 = np.var(data, ddof=1)
+
+print("Sample variance =", s2)
+
+# Step 3: Chi-square critical values
+chi2_lower = chi2.ppf(0.025, df)
+chi2_upper = chi2.ppf(0.975, df)
+
+# Step 4: CI for variance
+lower_var = (df * s2) / chi2_upper
+upper_var = (df * s2) / chi2_lower
+
+print("95% CI for variance =", (lower_var, upper_var))
+
+# Step 5: CI for standard deviation
+lower_sd = math.sqrt(lower_var)
+upper_sd = math.sqrt(upper_var)
+
+print("95% CI for standard deviation =", (lower_sd, upper_sd))
+________________________________________
+✅ Slip 9 & Slip 10 (Add SD part)
+# Slip 9 / 10 (Add SD)
+
+import numpy as np
+import math
+from scipy.stats import chi2
+
+# Example data (change for each slip)
+data = [12, 15, 14, 10, 13, 11, 16, 14, 13, 12]
+
+n = len(data)
+df = n - 1
+s2 = np.var(data, ddof=1)
+
+chi2_lower = chi2.ppf(0.025, df)
+chi2_upper = chi2.ppf(0.975, df)
+
+# Variance CI
+lower_var = (df * s2) / chi2_upper
+upper_var = (df * s2) / chi2_lower
+
+# Standard deviation CI
+lower_sd = math.sqrt(lower_var)
+upper_sd = math.sqrt(upper_var)
+
+print("Variance CI =", (lower_var, upper_var))
+print("SD CI =", (lower_sd, upper_sd))
+________________________________________
+✅ 🔥 One Universal Program (VERY IMPORTANT FOR VIVA)
+You can use this for ANY question directly:
+# Universal CI for variance and standard deviation
+
+import numpy as np
+import math
+from scipy.stats import chi2
+
+# Step 1: Input data
+data = list(map(float, input("Enter data values separated by space: ").split()))
+
+# Step 2: Sample size and variance
+n = len(data)
+df = n - 1
+s2 = np.var(data, ddof=1)
+
+print("\nSample variance =", s2)
+
+# Step 3: Confidence level (default 95%)
+alpha = 0.05
+
+# Step 4: Chi-square values
+chi2_lower = chi2.ppf(alpha/2, df)
+chi2_upper = chi2.ppf(1 - alpha/2, df)
+
+# Step 5: CI for variance
+lower_var = (df * s2) / chi2_upper
+upper_var = (df * s2) / chi2_lower
+
+# Step 6: CI for SD
+lower_sd = math.sqrt(lower_var)
+upper_sd = math.sqrt(upper_var)
+
+# Step 7: Output
+print("\nConfidence Interval for Variance =", (lower_var, upper_var))
+print("Confidence Interval for Standard Deviation =", (lower_sd, upper_sd))
+________________________________________
+🔥 Common Mistakes (Exam Important)
+❌ Wrong:
+	Using wrong χ² values
+	Not using df = n - 1
+	Not swapping upper/lower correctly
+________________________________________
+✅ Correct Logic:
+	Lower limit → divide by χ² upper
+	Upper limit → divide by χ² lower
+________________________________________
+🔥 Final Shortcut (Memory Trick)
+👉 “Big χ² → small value, Small χ² → big value”
+So:
+	Denominator big → answer small
+	Denominator small → answer big
+________________________________________
+🚀 If you want next:
+I can give you:
+✅ All 6 units combined into one single Python project (menu-driven)
+✅ Full handwritten exam answers (step-by-step format)
+✅ Important repeated questions + probability of coming in exam
+
