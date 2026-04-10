@@ -1,0 +1,530 @@
+## All Important Definitions from All Slips (Easy Words)
+
+These slips repeatedly use many statistics and probability concepts.
+Here are all the definitions in simple, easy language:
+
+---
+
+# 1. Probability
+
+### Definition:
+
+Probability means the chance that something will happen.
+
+Example:
+If chance of rain is 0.7, that means 70%.
+
+---
+
+# 2. Random Variable
+
+### Definition:
+
+A random variable is a number whose value depends on chance.
+
+Example:
+Number on dice after rolling.
+
+---
+
+# 3. Discrete Probability Distribution
+
+### Definition:
+
+A table/list showing probabilities of separate countable values.
+
+Example:
+X = 0,1,2,3
+
+---
+
+# 4. Continuous Probability Distribution
+
+### Definition:
+
+Probability distribution for values in a continuous range.
+
+Example:
+Height can be 170.2 cm, 170.25 cm etc.
+
+---
+
+# 5. Uniform Distribution
+
+### Definition:
+
+All values in an interval are equally likely.
+
+Example:
+Any number between 100 and 200 has same chance.
+
+---
+
+# 6. Normal Distribution
+
+### Definition:
+
+Bell-shaped distribution where most values are near the center.
+
+Also called Gaussian distribution.
+
+---
+
+# 7. Mean
+
+### Definition:
+
+Average value.
+
+Formula:
+[
+Mean=\frac{\text{sum of values}}{\text{number of values}}
+]
+
+---
+
+# 8. Variance
+
+### Definition:
+
+Measures how spread out numbers are from the mean.
+
+Large variance = data spread far apart.
+
+---
+
+# 9. Standard Deviation
+
+### Definition:
+
+Square root of variance.
+
+Shows average spread from mean.
+
+---
+
+# 10. Standard Error
+
+### Definition:
+
+Shows how much sample mean may vary from population mean.
+
+Formula:
+[
+SE=\frac{\sigma}{\sqrt n}
+]
+
+---
+
+# 11. Binomial Distribution
+
+### Definition:
+
+Used when:
+
+* fixed number of trials
+* only success/failure outcomes
+* same probability each time
+
+Example:
+10 coin tosses.
+
+---
+
+# 12. Poisson Distribution
+
+### Definition:
+
+Used to count rare events in fixed time/space.
+
+Example:
+Calls arriving per minute.
+
+---
+
+# 13. Hypergeometric Distribution
+
+### Definition:
+
+Used when sampling without replacement.
+
+Example:
+Drawing cards from deck.
+
+---
+
+# 14. Sampling Distribution
+
+### Definition:
+
+Distribution of all possible sample means.
+
+---
+
+# 15. Central Limit Theorem (CLT)
+
+### Definition:
+
+For large samples, sample means become normally distributed.
+
+Even if original data isn’t normal.
+
+---
+
+# 16. Confidence Interval (CI)
+
+### Definition:
+
+Range where true population value likely lies.
+
+Example:
+95% CI means likely correct 95% of time.
+
+---
+
+# 17. Confidence Level
+
+### Definition:
+
+How sure we are about interval estimate.
+
+Common:
+95%, 99%
+
+---
+
+# 18. Chi-Square Distribution
+
+### Definition:
+
+Used mainly for:
+
+* variance testing
+* confidence intervals for variance
+
+---
+
+# 19. t-Distribution
+
+### Definition:
+
+Used like normal distribution when sample is small.
+
+Especially when population SD unknown.
+
+---
+
+# 20. Z-Score
+
+### Definition:
+
+How many standard deviations a value is from mean.
+
+Formula:
+[
+z=\frac{x-\mu}{\sigma}
+]
+
+---
+
+# 21. CDF (Cumulative Distribution Function)
+
+### Definition:
+
+Total probability up to a value.
+
+Example:
+Probability X ≤ 5.
+
+---
+
+# 22. PDF (Probability Density Function)
+
+### Definition:
+
+Function showing density for continuous variables.
+
+---
+
+# 23. Bayes Theorem
+
+### Definition:
+
+Finds revised probability after new information.
+
+Formula:
+[
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}
+]
+
+---
+
+# 24. Chebyshev Theorem
+
+### Definition:
+
+At least:
+[
+1-\frac1{k^2}
+]
+data lies within k standard deviations.
+
+Works for any distribution.
+
+---
+
+# 25. Expected Value
+
+### Definition:
+
+Long-run average expected result.
+
+---
+
+# 26. Exact Probability
+
+### Definition:
+
+Probability calculated using full exact formula.
+
+---
+
+# 27. Approximation
+
+### Definition:
+
+Estimated answer close to exact value.
+
+Example:
+Normal approximation to binomial.
+
+---
+
+# 28. Continuity Correction
+
+### Definition:
+
+Adjustment when converting discrete to continuous.
+
+Example:
+120 becomes 119.5
+
+---
+
+# 29. Combination
+
+### Definition:
+
+Ways to choose items without order mattering.
+
+Formula:
+[
+\binom nr
+]
+
+---
+
+# 30. Factorial
+
+### Definition:
+
+Product of positive integers.
+
+Example:
+[
+5!=5×4×3×2×1
+]
+
+---
+
+# 31. Lambda ((\lambda))
+
+### Definition:
+
+Average event rate in Poisson distribution.
+
+---
+
+# 32. Parameter
+
+### Definition:
+
+Numerical characteristic of population.
+
+Example:
+Population mean.
+
+---
+
+# 33. Sample
+
+### Definition:
+
+Small part taken from population.
+
+---
+
+# 34. Population
+
+### Definition:
+
+Entire group being studied.
+
+---
+
+# 35. Margin of Error
+
+### Definition:
+
+Maximum expected estimation error.
+
+---
+
+# 36. Histogram
+
+### Definition:
+
+Bar graph showing frequency distribution.
+
+---
+
+# 37. Probability Mass Function (PMF)
+
+### Definition:
+
+Probability function for discrete variables.
+
+---
+
+# 38. Probability Density Function (PDF)
+
+### Definition:
+
+Probability curve for continuous variables.
+
+---
+
+# 39. Random Sampling
+
+### Definition:
+
+Selecting samples by chance.
+
+---
+
+# 40. Independent Events
+
+### Definition:
+
+One event does not affect another.
+
+Example:
+Coin tosses.
+
+---
+
+# 41. Success Probability (p)
+
+### Definition:
+
+Chance of success in one trial.
+
+---
+
+# 42. Failure Probability (q)
+
+### Definition:
+
+Chance of failure.
+
+[
+q=1-p
+]
+
+---
+
+# 43. Mean of Binomial
+
+### Definition:
+
+[
+np
+]
+
+---
+
+# 44. Variance of Binomial
+
+### Definition:
+
+[
+npq
+]
+
+---
+
+# 45. Mean of Poisson
+
+### Definition:
+
+Equal to lambda:
+[
+\lambda
+]
+
+---
+
+# 46. Variance of Poisson
+
+### Definition:
+
+Also equal to lambda:
+[
+\lambda
+]
+
+---
+
+# 47. Mean of Uniform Distribution
+
+### Definition:
+
+[
+\frac{a+b}{2}
+]
+
+---
+
+# 48. Variance of Uniform Distribution
+
+### Definition:
+
+[
+\frac{(b-a)^2}{12}
+]
+
+---
+
+# 49. erf() Function
+
+### Definition:
+
+Error function used to compute normal probabilities.
+
+---
+
+# 50. np.cumsum()
+
+### Definition:
+
+Adds values cumulatively one by one.
+
+Used to make CDF.
+
+---
+
+These are the complete major definitions used across all slips.
+
+Would you also like:
+
+### **“All formulas cheat sheet from all slips”** next?
